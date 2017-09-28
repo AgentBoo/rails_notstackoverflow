@@ -1,0 +1,54 @@
+1/cli
+rails g resource Question title:string content:text
+
+2/cli
+rails db:migrate
+
+3/cli
+rails g resource Answer content:text correct:boolean user:references question:references
+
+4/cli
+rails g resource User user:string email:string password:digest
+
+5/cli
+rails db:migrate
+
+6/cli
+rails g controller Sessions
+
+7/ app/controllers/sessions_controller.rb
+added new, create, destroy
+
+8/ config/routes.rb
+# all singular -- resource, session
+added resource :session, root to: sessions#new
+
+9/ app/models/user.rb
+added validation of email
+added before_validation hook
+declared private downcase_email
+# don't forget to go back and do
+add_index :email, unique: true
+
+10/ app/controllers/application_controller.rb
+define helper_method :current_user
+
+11/ app/views/sessions/new.html.erb
+create login template
+also # log in form
+added hyperlinks for signup
+
+12/ app/controllers/users_controller.rb
+declared new and create actions (sign up)
+
+13/ app/views/users/new.html.erb
+created sign up template
+
+=============================================================================
+14/ I already have a model for a q, route/resources, controller for a q, view dir for a q
+declare index, new, create, show, edit, update
+privatized question_params
+
+15/ app/views/questions/new.html.erb and app/views/questions/index.html.erb
+made a form
+made an index 
