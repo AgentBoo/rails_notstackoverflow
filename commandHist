@@ -51,4 +51,44 @@ privatized question_params
 
 15/ app/views/questions/new.html.erb and app/views/questions/index.html.erb
 made a form
-made an index 
+made an index
+
+16/ app/models/user.rb, app/models/question.rb
+belongs_to :user
+has_many :answers
+has_many :questions
+
+17/cli
+rails g migration add_user_to_questions user:references
+rails db:migrate
+
+18/ app/views/questions/show.html.erb
+made a primitive template for showing the question
+
+19/cli
+rails g migration give_correct_default_value_false
+
+20/ db/corresponding migration
+def change
+  change_column_default :answers, :correct, 'false'
+end
+
+21/cli
+rails db:migrate
+===============================================================================
+22/ app/models/answer.rb
+added validation of content
+
+23/ app/controllers/answers_controller
+declare create and delete
+
+24/ config/routes.rb
+nest resources answers under questions
+
+25/ app/views/show
+added form for answers
+added back to index
+added usernames
+
+26/ app/controllers/answers_controller
+declare update for correctness

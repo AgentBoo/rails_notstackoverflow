@@ -11,8 +11,9 @@ class QuestionsController < ApplicationController
   def create
     @question = Question.new(question_params)
     @question.user_id = session[:user_id]
-    @link.save
-    redirect_to question_path
+    @question.save
+    redirect_to questions_path
+    # redirect_to question_path(@question)
   end
 
   def show
@@ -27,7 +28,7 @@ class QuestionsController < ApplicationController
     @question = Question.find(params[:id])
     @question.update(question_params)
     @question.save
-    redirect_to question_path
+    # redirect_to question_path(@question)
   end
 
   private
