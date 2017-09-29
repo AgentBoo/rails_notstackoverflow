@@ -20,7 +20,8 @@ class SessionsController < ApplicationController
   # logout a user: destroy a user! :D
   def destroy
     session[:user_id] = nil
-    redirect_to new_session_path    # back to login sessions#new
+    redirect_to questions_path
+    # redirect_to new_session_path    # back to login sessions#new
   end
 
 

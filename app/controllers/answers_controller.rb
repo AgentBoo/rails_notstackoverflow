@@ -9,8 +9,8 @@ class AnswersController < ApplicationController
   end
 
   def update
-    @question = Question.find(params[:id])
-    @answer = @question.answers.find(params[:answer_id])
+    @question = Question.find(params[:question_id])
+    @answer = @question.answers.find(params[:id])
     @answer.update(:correct => params[:correct])
     @answer.save
     redirect_to question_path(@question)

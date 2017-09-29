@@ -1,6 +1,6 @@
 <%= @question.title %>
 <%= @question.content %>
-<%= @question.user.email %>
+<%= @question.user.email if @question.user%>
 
 <h5> Add an answer </h5>
 <%= form_for ([@question, @question.answers.new]), url: question_answers_path(@question), method: :post do |f| %>
@@ -11,9 +11,10 @@
 <h5> Answers </h5>
 <% if @question.user.id == session[:user_id] %>
   <% @question.answers.each do |answer| %>
-      <%= button_to 'Mark as correct', [answer.question, answer], params: {:id => answer.id}, method: :put %>
-      <%= answer.content if answer.content%>
-      <%= answer.user.email if answer.user %>
+      <%= button_to "Mark as correct", url_for(controller: 'answers', action: 'update', :id => answer.id, question_id: @question.id), params: {:correct => "true"}, method: :put if answer.content %>
+      <%= button_to "Unmark", url_for(controller: 'answers', action: 'update', :id => answer.id, question_id: @question.id), params: {:correct => "false"}, method: :put if answer.content %>
+      <%= answer.content %>
+      <%= answer.user.email if answer.user%>
   <% end %>
 
 <% else %>

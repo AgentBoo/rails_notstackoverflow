@@ -1,3 +1,15 @@
 <% @questions.each do |question| %>
   <%= link_to question.title, question_path(question)%>
 <% end %>
+
+
+<br>
+<br>
+
+<% if !session[:user_id] %>
+  <%= link_to 'Log in', new_session_path %>
+  <%= link_to 'Sign up', new_user_path %>
+<% else %>
+  <%= link_to 'New question', new_question_path %>
+  <%= link_to 'Log out', session_path, method: :delete %>
+<% end %>
